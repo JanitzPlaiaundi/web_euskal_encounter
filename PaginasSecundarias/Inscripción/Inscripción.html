@@ -38,8 +38,8 @@
         <section class="headerBotones" id="headerUser">
             <a class="botonInicioDeSesion botonesRegistro" id="btnLogin" href="../InicioSesion/InicioSesionRegistrarse.html">Iniciar sesión</a>
             <a class="botonRegistro botonesRegistro" id="btnRegister" href="../InicioSesion/InicioSesionRegistrarse.html#register">Registrarse</a>
-            <button id="botonMenuMovil">
-                <img id="fotoMenuMoviles" src="../../Recursos/Imagenes/BOTON_info.png">
+            <button id="botonMenuMovil" aria-label="Enviar formulario">
+                <img id="fotoMenuMoviles" src="../../Recursos/Imagenes/BOTON_info.png" alt="abrir menu movil">
             </button>
         </section>
     </header>
@@ -64,8 +64,8 @@
             <input type="email" id="correo" name="correo" required>
 
             <label for="telefono">Número de telefono *</label>
-            <img id="ImagenPais" src="../../Recursos/Imagenes/Flags/es.png" alt="">
-            <select id="Prefijo" onchange={actualizarBandera()}></select>
+            <img id="ImagenPais" src="../../Recursos/Imagenes/Flags/es.png">
+            <select id="Prefijo" onchange="actualizarBandera()"></select>
             <input type="number" id="telefono" name="telefono" inputmode="numeric" placeholder="123456789" required>
 
             <label for="evento">Evento *</label>
@@ -98,10 +98,10 @@
             <p>Euskal Encounter reúne cada año a miles de aficionados a la tecnología y los videojuegos para compartir experiencias, competir y disfrutar de la cultura digital.</p>
         </div>
         <div class="divRedes">
-            <a class="enlacesFooter" href="https://www.facebook.com/euskalencounter"><img class="logosFooter" src="../../Recursos/Imagenes/redes/logoFacebook.svg" alt="logo de facebook"></a>
-            <a class="enlacesFooter" href="https://www.youtube.com/user/ekcounter"><img class="logosFooter" src="../../Recursos/Imagenes/redes/logoyoutube.svg" alt="logo de facebook"></a>
-            <a class="enlacesFooter" href="https://www.instagram.com/euskalencounter/"><img class="logosFooter" src="../../Recursos/Imagenes/redes/logoInstagram.svg" alt="logo de facebook"></a>
-            <a class="enlacesFooter" href="https://www.twitch.tv/euskalencounter"><img class="logosFooter" src="../../Recursos/Imagenes/redes/logoTwitch.svg" alt="logo de facebook"></a>
+            <a class="enlacesFooter" href="https://www.facebook.com/euskalencounter"><img class="logosFooter" src="../../Recursos/Imagenes/LogosRedes/" alt="logo de facebook"></a>
+            <a class="enlacesFooter" href="https://www.youtube.com/user/ekcounter"><img class="logosFooter" src="../../Recursos/Imagenes/LogosRedes/logoYoutube.svg" alt="logo de facebook"></a>
+            <a class="enlacesFooter" href="https://www.instagram.com/euskalencounter/"><img class="logosFooter" src="../../Recursos/Imagenes/LogosRedes/logoInstagram.svg" alt="logo de facebook"></a>
+            <a class="enlacesFooter" href="https://www.twitch.tv/euskalencounter"><img class="logosFooter" src="../../Recursos/Imagenes/LogosRedes/logoTwitch.svg" alt="logo de facebook"></a>
         </div>
         <img class="imagenFooter" src="../../Recursos/Imagenes/logoHeader.png" alt="imagen footer">
     </footer>
