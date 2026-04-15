@@ -1,0 +1,1 @@
+const event_view = localStorage.getItem("selected_event_view")

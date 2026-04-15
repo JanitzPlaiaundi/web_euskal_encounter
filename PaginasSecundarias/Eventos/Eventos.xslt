@@ -86,22 +86,22 @@
                     <div class="divRedes">
                         <a class="enlacesFooter" href="https://www.facebook.com/euskalencounter">
                             <img class="logosFooter"
-                                src="../../Recursos/Imagenes/redes/logoFacebook.svg"
+                                src="../../Recursos/Imagenes/LogosRedes/logoFacebook.svg"
                                 alt="logo de facebook" />
                         </a>
                         <a class="enlacesFooter" href="https://www.youtube.com/user/ekcounter">
                             <img class="logosFooter"
-                                src="../../Recursos/Imagenes/redes/logoyoutube.svg"
+                                src="../../Recursos/Imagenes/LogosRedes/logoyoutube.svg"
                                 alt="logo de facebook" />
                         </a>
                         <a class="enlacesFooter" href="https://www.instagram.com/euskalencounter/">
                             <img class="logosFooter"
-                                src="../../Recursos/Imagenes/redes/logoInstagram.svg"
+                                src="../../Recursos/Imagenes/LogosRedes/logoInstagram.svg"
                                 alt="logo de facebook" />
                         </a>
                         <a class="enlacesFooter" href="https://www.twitch.tv/euskalencounter">
                             <img class="logosFooter"
-                                src="../../Recursos/Imagenes/redes/logoTwitch.svg"
+                                src="../../Recursos/Imagenes/LogosRedes/logoTwitch.svg"
                                 alt="logo de facebook" />
                         </a>
                     </div>
