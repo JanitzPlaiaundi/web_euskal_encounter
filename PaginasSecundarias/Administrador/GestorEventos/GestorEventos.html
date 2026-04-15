@@ -1,46 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel de Control - CRUD Eventos</title>
-    <link rel="stylesheet" href="GestorEventos.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="GestorEventos.css" />
+    <script src="GestorEventos.js" defer ></script>
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>Gestión de Eventos</h1>
-            <p>Administra, crea y monitorea tus eventos en tiempo real.</p>
-        </header>
+      <header>
+        <h1>Gestión de Eventos</h1>
+        <p>Administra, crea y monitorea tus eventos en tiempo real.</p>
+      </header>
 
-        <main class="dashboard">
-            <section class="action-panel">
-                <button class="btn btn-create" id="btnCreate">
-                    <span>➕</span> Crear Evento
-                </button>
-                <button class="btn btn-read" id="btnRead">
-                    <span>👁️</span> Ver Eventos
-                </button>
-                <button class="btn btn-update" id="btnUpdate">
-                    <span>🔄</span> Actualizar
-                </button>
-                <button class="btn btn-delete" id="btnDelete">
-                    <span>🗑️</span> Eliminar
-                </button>
-            </section>
-
-            <section class="display-zone">
-                <div class="display-header">
-                    <h3>Consola de Cambios</h3>
-                    <span class="status-indicator">En línea</span>
-                </div>
-                <div class="display-content" id="displayContent">
-                    <p class="placeholder-text">Esperando acciones... Los resultados de tus operaciones aparecerán aquí.</p>
-                </div>
-            </section>
-        </main>
+      <main class="dashboard">
+        <section class="action-panel">
+          <button class="btn btn-create" id="btnCreate" onclick={colectEventData()}>
+            <span>➕</span> Crear Evento
+          </button>
+          <button class="btn btn-read" id="btnRead">
+            <span>👁️</span> Ver Eventos
+          </button>
+          <button class="btn btn-update" id="btnUpdate">
+            <span>🔄</span> Actualizar
+          </button>
+          <button class="btn btn-delete" id="btnDelete">
+            <span>🗑️</span> Eliminar
+          </button>
+        </section>
+        <section id="user-interaction">
+    
+        </section>
+        <section id="display-zone">
+          <div class="display-header">
+            <h3>Consola de Cambios</h3>
+            <span class="status-indicator">En línea</span>
+          </div>
+          <div class="display-content" id="displayContent">
+            <p class="placeholder-text">
+              Esperando acciones... Los resultados de tus operaciones aparecerán
+              aquí.
+            </p>
+          </div>
+        </section>
+      </main>
     </div>
-
-</body>
+  </body>
 </html>
