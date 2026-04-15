@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: #99999999;
+}
+
+header {
+    background-color: #ffffff;
+}
+
+.imagen-header {
+    background: url("https://okdiario.com/img/2019/09/17/como-organizar-los-contactos-de-whatsapp-655x368.jpg") center/cover no-repeat;
+    text-align: center;
+    padding: 80px 20px;
+    color: rgb(255, 255, 255);
+}
+
+.imagen-header h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.imagen-header p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.contenedor-principal {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 0 20px;
+    gap: 50px;
+}
+
+.formulario {
+    flex: 1;
+}
+
+.formulario label {
+    display: block;
+    font-weight: bold;
+    margin: 15px 0 5px;
+}
+
+.formulario input,
+.formulario textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.formulario textarea {
+    height: 120px;
+}
+
+.formulario button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    background-color: #444;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.formulario button:hover {
+    background-color: #666;
+}
+
+.informacion-empresa {
+    flex: 0.8;
+    font-size: 0.95rem;
+}
+
+.informacion-empresa p {
+    margin: 10px 0;
+}
+
+.informacion-empresa strong {
+    color: #111;
+}
+
+.alerta-warning {
+    display: none;
+    align-items: center;
+
+    width: fit-content;
+    min-width: 350px;
+
+    margin: 0 auto;
+
+    background-color: #fff3cd;
+    color: #664d03;
+    border: 1px solid #ffecb5;
+    border-radius: 6px;
+
+    padding: 12px 30px;
+}
+
+
+.alerta-warning.activa {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.alerta-icono {
+    width: 1em;
+    height: 1em;
+    fill: #664d03;
+    flex-shrink: 0;
+}
