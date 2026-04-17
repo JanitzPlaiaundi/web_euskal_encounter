@@ -7,11 +7,32 @@ services:
       - .:/var/www/html
     depends_on:
       - db
+      - directus
 
   db:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: 1DAW3
-      MYSQL_DATABASE: bbdd
+      MYSQL_ROOT_PASSWORD: 1DAW3_BBDD
+      MYSQL_DATABASE: EUSKALENCOUNTER
     ports:
       - "3307:3306"
+
+  directus:
+    image: directus/directus:latest
+    ports:
+      - "8055:8055"
+    environment:
+      KEY: "supersecretkey" 
+      SECRET: "supersecretsecret"
+      
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "*"
+
+      DB_CLIENT: "mysql"
+      DB_HOST: "db" # <-- ACTUALIZADO: Usa el nombre del servicio de la base de datos
+      DB_PORT: "3306" # Se queda en 3306 porque es el puerto interno del contenedor MySQL
+      DB_DATABASE: "EUSKALENCOUNTER" # <-- ACTUALIZADO: El nombre correcto de la variable para Directus
+      DB_USER: "root"
+      DB_PASSWORD: "1DAW3_BBDD" # <-- ACTUALIZADO: Debe coincidir exactamente con MYSQL_ROOT_PASSWORD
+      
+      WEBSOCKETS_ENABLED: "true"
