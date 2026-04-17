@@ -1,0 +1,21 @@
+services:
+  directus:
+    image: directus/directus:latest
+    ports:
+      - "8055:8055"
+    environment:
+      KEY: "supersecretkey" # En producción, tendríamos que poner una clave más seguras, ya que se utiliza para cifrar conexiones, entre otras cosas
+      SECRET: "supersecretsecret" # En producción, tendríamos que poner una clave más seguras, ya que se utiliza para cifrar conexiones, entre otras cosas
+
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "*"
+
+      DB_CLIENT: "mysql" # Déjalo como está
+      DB_HOST: "host.docker.internal" # Déjalo como está
+      # ACTUALIZA ESTOS VALORES
+      DB_PORT: "3306" # Cámbialo si has instalado MySQL en otro puerto
+      DB_DATABASE: "euskalencounter" # Pon aquí el nombre de la base de datos a la que le quieres crear la API
+      DB_USER: "root" # Pon aquí el usuario que quieres usar para conectarte a la base de datos
+      DB_PASSWORD: "1DAW3" # Pon aquí su contraseña
+
+      WEBSOCKETS_ENABLED: "true"

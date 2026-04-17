@@ -14,4 +14,28 @@ services:
       MYSQL_ROOT_PASSWORD: 1DAW3
       MYSQL_DATABASE: bbdd
     ports:
+<<<<<<< Updated upstream
       - "3307:3306"
+=======
+      - "3307:3306"
+
+  directus:
+    image: directus/directus:latest
+    ports:
+      - "8055:8055"
+    environment:
+      KEY: "supersecretkey" 
+      SECRET: "supersecretsecret"
+      
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "*"
+
+      DB_CLIENT: "mysql"
+      DB_HOST: "db"
+      DB_PORT: "3306"
+      DB_DATABASE: "EUSKALENCOUNTER"
+      DB_USER: "root"
+      DB_PASSWORD: "1DAW3_BBDD"
+      
+      WEBSOCKETS_ENABLED: "true"
+>>>>>>> Stashed changes
