@@ -1,0 +1,21 @@
+services:
+  directus:
+    image: directus/directus:latest
+    ports:
+      - "8055:8055"
+    environment:
+      KEY: "supersecretkey"
+      SECRET: "supersecretsecret"
+
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "*"
+
+      DB_CLIENT: "mysql"
+      DB_HOST: "host.docker.internal"
+      # ACTUALIZA ESTOS VALORES
+      DB_PORT: "3306"
+      DB_DATABASE: "euskalencounter"
+      DB_USER: "root"
+      DB_PASSWORD: "1DAW3"
+
+      WEBSOCKETS_ENABLED: "true"

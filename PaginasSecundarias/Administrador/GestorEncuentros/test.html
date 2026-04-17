@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Control Directus</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 20px; color: #333; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h2 { font-size: 18px; margin-top: 0; color: #444; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; }
+        input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold; margin-bottom: 5px; transition: opacity 0.2s; }
+        button:hover { opacity: 0.9; }
+        
+        .btn-cargar { background-color: #6366f1; }
+        .btn-insertar { background-color: #10b981; }
+        .btn-actualizar { background-color: #3b82f6; }
+        .btn-eliminar { background-color: #ef4444; }
+        .btn-filtrar { background-color: #f59e0b; }
+
+        /* Estilos para el visor de resultados */
+        #visor-resultados { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); min-height: 100px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background-color: #f8fafc; text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+        tr:hover { background-color: #f9fafb; }
+        .empty-msg { color: #666; font-style: italic; text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="grid">
+        <div class="card">
+            <h2>Gestión de Guardias</h2>
+            <button class="btn-cargar" onclick="cargarDatos()">Ver Todas las Guardias</button>
+        </div>
+
+        <div class="card">
+            <h2>Registrar Vehículo</h2>
+            <button class="btn-insertar" onclick="insertarDatos()">Insertar Vehículo Fijo</button>
+        </div>
+
+        <div class="card">
+            <h2>Actualizar Impuesto</h2>
+            <input type="text" id="upd_matricula" placeholder="Matrícula">
+            <input type="number" id="upd_impuesto" placeholder="Nuevo Impuesto">
+            <button class="btn-actualizar" onclick="ejecutarActualizar()">Actualizar Registro</button>
+        </div>
+
+        <div class="card">
+            <h2>Eliminar Vehículo</h2>
+            <input type="text" id="del_matricula" placeholder="Matrícula">
+            <button class="btn-eliminar" onclick="ejecutarEliminar()">Borrar Permanentemente</button>
+        </div>
+
+        <div class="card">
+            <h2>Buscador Avanzado</h2>
+            <input type="number" id="filtro_impuesto" placeholder="Impuesto mayor que...">
+            <button class="btn-filtrar" onclick="ejecutarFiltro()">Filtrar Vehículos</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Panel de Resultados</h2>
+        <div id="visor-resultados">
+            <p class="empty-msg">Pulsa un botón para cargar información...</p>
+        </div>
+    </div>
+
+    <script>
+        const token = "SVHk7V5VFKpgI2DiPLucVHXAjNdIh8kS"; 
+        const visor = document.getElementById('visor-resultados');
+
+        function renderizarTabla(lista, campos) {
+            if (lista.length === 0) {
+                visor.innerHTML = '<p class="empty-msg">No se encontraron registros.</p>';
+                return;
+            }
+
+            let html = '<table><thead><tr>';
+            campos.forEach(c => html += `<th>${c.toUpperCase()}</th>`);
+            html += '</tr></thead><tbody>';
+
+            lista.forEach(item => {
+                html += '<tr>';
+                campos.forEach(c => html += `<td>${item[c] || '-'}</td>`);
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            visor.innerHTML = html;
+        }
+
+        async function cargarDatos() {
+            const url = "http://localhost:8055/items/guardias";
+            try {
+                const respuesta = await fetch(url, { headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` } });
+                if (!respuesta.ok) throw new Error("Error en la petición");
+                const datos = await respuesta.json();
+                
+                // Ajusta los campos según tu colección 'guardias'
+                renderizarTabla(datos.data, ['id', 'status', 'descripcion']); 
+            } catch (error) { visor.innerHTML = `<p style="color:red">Error: ${error.message}</p>`; }
+        }
+
+        async function insertarDatos() {
+            const url = "http://localhost:8055/items/vehiculos";
+            try {
+                const res = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({ "Matricula": "1457JKW", "MarcaModelo": "Renault Scenic", "Impuesto": 80.0 })
+                });
+                if (!res.ok) throw new Error("Error al insertar");
+                alert("Insertado correctamente");
+            } catch (error) { alert(error); }
+        }
+
+        async function actualizarDatos(matricula, v_impuesto) {
+            const url = "http://localhost:8055/items/vehiculos";
+            try {
+                const res = await fetch(`${url}/${matricula}`, {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({ Impuesto: parseFloat(v_impuesto) })
+                });
+                if (!res.ok) throw new Error("No se encontró el vehículo o error de API");
+                alert("Actualizado correctamente");
+            } catch (error) { alert(error); }
+        }
+
+        async function eliminar(matricula) {
+            const url = "http://localhost:8055/items/vehiculos";
+            try {
+                const res = await fetch(`${url}/${matricula}`, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error("Error al eliminar");
+                alert("El vehículo se ha borrado con éxito");
+            } catch (error) { alert(error); }
+        }
+
+        async function vehiculosConImpuestosSuperiores(impuestoMinimo) {
+            const url = "http://localhost:8055/items/vehiculos";
+            try {
+                const respuesta = await fetch(`${url}?filter[Impuesto][_gt]=${impuestoMinimo}`, {
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
+                });
+                if (!respuesta.ok) throw new Error("Error al filtrar");
+                const datos = await respuesta.json();
+                
+                renderizarTabla(datos.data, ['Matricula', 'MarcaModelo', 'Impuesto']);
+            } catch (error) { visor.innerHTML = `<p style="color:red">Error: ${error.message}</p>`; }
+        }
+
+        function ejecutarActualizar() {
+            const mat = document.getElementById('upd_matricula').value;
+            const imp = document.getElementById('upd_impuesto').value;
+            if(mat && imp) actualizarDatos(mat, imp);
+        }
+
+        function ejecutarEliminar() {
+            const mat = document.getElementById('del_matricula').value;
+            if(mat) eliminar(mat);
+        }
+
+        function ejecutarFiltro() {
+            const imp = document.getElementById('filtro_impuesto').value;
+            if(imp) vehiculosConImpuestosSuperiores(imp);
+        }
+    </script>
+</body>
+</html>
