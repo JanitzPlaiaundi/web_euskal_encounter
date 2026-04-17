@@ -1,116 +1,151 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Eventos</title>
-        <link rel="icon" type="image/jpg" href="../../Recursos/Imagenes/Logo.jpg" />
-        <link rel="stylesheet" href="Eventos.css" />
-        <script src="../../Recursos/JSConjuntos/menuHeader.js" defer=""></script>
-        <script src="../../Recursos/JSConjuntos/userHeader.js" defer=""></script>
-        <link rel="stylesheet" href="../../Recursos/CssConjuntos/footer.css" />
-        <link rel="stylesheet" href="../../Recursos/CssConjuntos/header.css" />
-    </head>
-    <body>
-        <header>
-            <nav id="menuMovil">
-                <a href="../../index.html">Inicio</a>
-                <a href="../Eventos/Eventos.php">Eventos</a>
-                <a href="../Participantes/participantes.html">Participantes</a>
-                <a href="../Calendario/Calendario.html">Calendario</a>
-                <a href="../Inscripción/Inscripción.html">Inscripción</a>
-                <a href="../Contacto/Contacto.html">Contacto</a>
-            </nav>
-            <section class="sectionLogoHeader">
-                <a href="#">
-                    <img src="/Recursos/Imagenes/logoHeader.png" alt="logoHeader" class="logoHeader" />
-                </a>
-            </section>
-            <nav class="headerEnlaces">
-                <a class="enlacesHeader" href="../../index.html">Inicio</a>
-                <a class="enlacesHeader" href="#">Eventos</a>
-                <a class="enlacesHeader" href="../Participantes/participantes.html">Participantes</a>
-                <a class="enlacesHeader" href="../Calendario/Calendario.html">Calendario</a>
-                <a class="enlacesHeader" href="../Inscripción/Inscripción.html">Inscripción</a>
-                <a class="enlacesHeader" href="../Contacto/Contacto.html">Contacto</a>
-            </nav>
-            <section class="headerBotones" id="headerUser">
-                <a class="botonInicioDeSesion botonesRegistro" id="btnLogin" href="../InicioSesion/InicioSesionRegistrarse.html">Iniciar sesión</a>
-                <a class="botonRegistro botonesRegistro" id="btnRegister" href="../InicioSesion/InicioSesionRegistrarse.html#register">Registrarse</a>
-                <button id="botonMenuMovil">
-                    <img id="fotoMenuMoviles" src="../../Recursos/Imagenes/BOTON_info.png" />
-                </button>
-            </section>
-        </header>
-        
-        <main class="eventosMain">
-            <section id="zonaTarjetas">
-                <main class="mainTarjetas" id="contenedor-eventos">
-                </main>
-            </section>
-        </main>
-        
-        <footer>
-            <div class="textoFooter">
-                <h3>Sobre nosotros</h3>
-                <p>Euskal Encounter reúne cada año a miles de aficionados a la tecnología y los videojuegos para compartir experiencias, competir y disfrutar de la cultura digital.</p>
-            </div>
-            <div class="divRedes">
-                <a class="enlacesFooter" href="https://www.facebook.com/euskalencounter">
-                    <img class="logosFooter" src="../../Recursos/Imagenes/LogosRedes/logoFacebook.svg" alt="logo de facebook" />
-                </a>
-                <a class="enlacesFooter" href="https://www.youtube.com/user/ekcounter">
-                    <img class="logosFooter" src="../../Recursos/Imagenes/LogosRedes/logoyoutube.svg" alt="logo de youtube" />
-                </a>
-                <a class="enlacesFooter" href="https://www.instagram.com/euskalencounter/">
-                    <img class="logosFooter" src="../../Recursos/Imagenes/LogosRedes/logoInstagram.svg" alt="logo de instagram" />
-                </a>
-                <a class="enlacesFooter" href="https://www.twitch.tv/euskalencounter">
-                    <img class="logosFooter" src="../../Recursos/Imagenes/LogosRedes/logoTwitch.svg" alt="logo de twitch" />
-                </a>
-            </div>
-            <img class="imagenFooter" src="../../Recursos/Imagenes/logoHeader.png" alt="imagen footer" />
-        </footer>
-        
-        <script>
-            // Debes sustituir esta URL por la ruta real de tu colección "eventos" en Directus
-            const DIRECTUS_URL = 'http://tu-servidor-directus.com/items/eventos';
-            
-            async function obtenerEventos() {
-            try {
-            const respuesta = await fetch(DIRECTUS_URL);
-            const json = await respuesta.json();
-            const eventos = json.data;
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos - Euskal Encounter</title>
+    <link rel="icon" type="image/jpg" href="../../Recursos/Imagenes/Logo.jpg" />
+    <link rel="stylesheet" href="Eventos.css" />
+    <script src="../../Recursos/JSConjuntos/menuHeader.js" defer=""></script>
+    <script src="../../Recursos/JSConjuntos/userHeader.js" defer=""></script>
+    <link rel="stylesheet" href="../../Recursos/CssConjuntos/footer.css" />
+    <link rel="stylesheet" href="../../Recursos/CssConjuntos/header.css" />
+    <style>
+        .status-msg {
+            text-align: center;
+            padding: 20px;
+            color: #444;
+            width: 100%;
+        }
+
+        .error {
+            color: #ef4444;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="menuMovil">
+            <a href="../../index.html">Inicio</a>
+            <a href="../Eventos/Eventos.php">Eventos</a>
+            <a href="../Participantes/participantes.html">Participantes</a>
+            <a href="../Calendario/Calendario.html">Calendario</a>
+            <a href="../Inscripción/Inscripción.html">Inscripción</a>
+            <a href="../Contacto/Contacto.html">Contacto</a>
+        </nav>
+        <section class="sectionLogoHeader">
+            <a href="#">
+                <img src="/Recursos/Imagenes/logoHeader.png" alt="logoHeader" class="logoHeader" />
+            </a>
+        </section>
+        <nav class="headerEnlaces">
+            <a class="enlacesHeader" href="../../index.html">Inicio</a>
+            <a class="enlacesHeader" href="#">Eventos</a>
+            <a class="enlacesHeader" href="../Participantes/participantes.html">Participantes</a>
+            <a class="enlacesHeader" href="../Calendario/Calendario.html">Calendario</a>
+            <a class="enlacesHeader" href="../Inscripción/Inscripción.html">Inscripción</a>
+            <a class="enlacesHeader" href="../Contacto/Contacto.html">Contacto</a>
+        </nav>
+        <section class="headerBotones" id="headerUser">
+            <a class="botonInicioDeSesion botonesRegistro" id="btnLogin"
+                href="../InicioSesion/InicioSesionRegistrarse.html">Iniciar sesión</a>
+            <a class="botonRegistro botonesRegistro" id="btnRegister"
+                href="../InicioSesion/InicioSesionRegistrarse.html#register">Registrarse</a>
+            <button id="botonMenuMovil">
+                <img id="fotoMenuMoviles" src="../../Recursos/Imagenes/BOTON_info.png" />
+            </button>
+        </section>
+    </header>
+
+    <main class="eventosMain">
+        <section id="zonaTarjetas">
+            <main class="mainTarjetas" id="contenedor-eventos">
+                <p class="status-msg">Cargando eventos...</p>
+            </main>
+        </section>
+    </main>
+
+    <footer>
+        <div class="textoFooter">
+            <h3>Sobre nosotros</h3>
+            <p>Euskal Encounter reúne cada año a miles de aficionados a la tecnología y los videojuegos para compartir
+                experiencias, competir y disfrutar de la cultura digital.</p>
+        </div>
+        <div class="divRedes">
+            <a class="enlacesFooter" href="https://www.facebook.com/euskalencounter"><img class="logosFooter"
+                    src="../../Recursos/Imagenes/LogosRedes/logoFacebook.svg" alt="facebook" /></a>
+            <a class="enlacesFooter" href="https://www.youtube.com/user/ekcounter"><img class="logosFooter"
+                    src="../../Recursos/Imagenes/LogosRedes/logoyoutube.svg" alt="youtube" /></a>
+            <a class="enlacesFooter" href="https://www.instagram.com/euskalencounter/"><img class="logosFooter"
+                    src="../../Recursos/Imagenes/LogosRedes/logoInstagram.svg" alt="instagram" /></a>
+            <a class="enlacesFooter" href="https://www.twitch.tv/euskalencounter"><img class="logosFooter"
+                    src="../../Recursos/Imagenes/LogosRedes/logoTwitch.svg" alt="twitch" /></a>
+        </div>
+        <img class="imagenFooter" src="../../Recursos/Imagenes/logoHeader.png" alt="logo footer" />
+    </footer>
+
+    <script>
+        const token = "WfKmzKcqd2_YtIm00ofib8Um0dhlV1ii";
+        const url = "http://localhost:8055/items/evento";
+
+        // Función utilizando sessionStorage para guardar el valor clave
+        function verDetalle(id) {
+            sessionStorage.setItem('eventoSeleccionadoId', id);
+            window.location.href = 'DetalleEvento.html';
+        }
+
+        async function cargarEventos() {
             const contenedor = document.getElementById('contenedor-eventos');
-            
-            eventos.forEach(evento => {
-            // Si las imágenes están alojadas en Directus, la URL sería similar a: `http://tu-servidor-directus.com/assets/${evento.Imagen}`
-            // Aquí se mantiene la estructura local original por defecto:
-            const rutaImagen = `Imagenes/${evento.Imagen}`;
-            
-            const article = document.createElement('article');
-            article.className = 'tarjeta';
-            
-            article.innerHTML = `
-            <div class="divImagen" style="background-image: url('${rutaImagen}')">
-                <h2 class="nombreEvento">${evento.Título}</h2>
-                <h2 class="fechaEvento">${evento.FechaIni}</h2>
-            </div>
-            <div class="divTarjetas">
-                <a href="#" class="textoTarjetas">Ver mas</a>
-                <button class="btnTarjetas">Inscríbete</button>
-            </div>
-            `;
-            
-            contenedor.appendChild(article);
-            });
+            try {
+                const respuesta = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
+                if (!respuesta.ok) throw new Error("No se pudo conectar con la API");
+
+                const resultado = await respuesta.json();
+                const eventos = resultado.data;
+
+                if (!eventos || eventos.length === 0) {
+                    contenedor.innerHTML = '<p class="status-msg">No hay eventos disponibles.</p>';
+                    return;
+                }
+
+                contenedor.innerHTML = '';
+
+                eventos.forEach(evento => {
+                    const article = document.createElement('article');
+                    article.className = 'tarjeta';
+
+                    const nombreImagen = evento.IMAGEN || 'default.jpg';
+
+                    article.innerHTML = `
+                        <div class="divImagen" style="background-image: url('Imagenes/${nombreImagen}')">
+                            <h2 class="nombreEvento">${evento.TITULO || 'Sin título'}</h2>
+                            <h2 class="fechaEvento">${evento.FECHA_INICIO || ''}</h2>
+                        </div>
+                        <div class="divTarjetas">
+                            <a href="javascript:void(0)" onclick="verDetalle('${evento.ID}')" class="textoTarjetas">Ver mas</a>
+                            <a href="../Inscripción/Inscripción.html" class="btnTarjetas">Inscríbete</a>
+                        </div>
+                    `;
+                    contenedor.appendChild(article);
+                });
+
             } catch (error) {
-            console.error('Error al cargar los eventos desde Directus:', error);
+                contenedor.innerHTML = `<p class="status-msg error">Error: ${error.message}</p>`;
             }
-            }
-            
-            // Ejecutar la función cuando el documento esté listo
-            document.addEventListener('DOMContentLoaded', obtenerEventos);
-        </script>
-    </body>
+        }
+
+        window.onload = cargarEventos;
+    </script>
+</body>
+
 </html>
