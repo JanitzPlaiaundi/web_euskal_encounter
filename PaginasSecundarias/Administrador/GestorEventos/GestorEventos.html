@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel de Control - CRUD Eventos</title>
     <link rel="stylesheet" href="GestorEventos.css" />
-    <script src="GestorEventos.js" defer ></script>
+    <script src="GestorEventos.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -16,22 +16,36 @@
 
       <main class="dashboard">
         <section class="action-panel">
-          <button class="btn btn-create" id="btnCreate" onclick={colectEventData()}>
+          <button
+            class="btn btn-create"
+            id="btnCreate"
+            onclick="
+              {
+                colectEventData();
+              }
+            "
+          >
             <span>➕</span> Crear Evento
           </button>
-          <button class="btn btn-read" id="btnRead">
+          <button
+            class="btn btn-read"
+            id="btnRead"
+            onclick="
+              {
+                readEvents();
+              }
+            "
+          >
             <span>👁️</span> Ver Eventos
           </button>
-          <button class="btn btn-update" id="btnUpdate">
+          <button class="btn btn-update" id="btnUpdate" onclick={colectUpdateData()}>
             <span>🔄</span> Actualizar
           </button>
-          <button class="btn btn-delete" id="btnDelete">
+          <button class="btn btn-delete" id="btnDelete" onclick={colectDeleteData()}>
             <span>🗑️</span> Eliminar
           </button>
         </section>
-        <section id="user-interaction">
-    
-        </section>
+        <section id="user-interaction"></section>
         <section id="display-zone">
           <div class="display-header">
             <h3>Consola de Cambios</h3>
